@@ -12,15 +12,14 @@ public class GetKSmallestNumbersTests {
     void shouldReturnKSmallestNumbers() {
         byte[] array = {8, 9, 1, 10};
         int k = 2;
-
         byte[] actualResult = Lab2.getKSmallestNumbers(array, k);
-
         byte[] expectedResult = {1, 8};
         assertArrayEquals(expectedResult, actualResult);
 
-        actualResult = Lab2.getKSmallestNumbers(array, array.length);
-        Arrays.sort(array);
-        assertArrayEquals(array, actualResult);
+        byte[] newArray = {8, 1, 5, 3, 5, 8, 1, 6};
+        actualResult = Lab2.getKSmallestNumbers(newArray, newArray.length);
+        Arrays.sort(newArray);
+        assertArrayEquals(newArray, actualResult);
     }
 
 }
