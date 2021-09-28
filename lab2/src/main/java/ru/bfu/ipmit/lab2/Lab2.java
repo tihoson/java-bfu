@@ -19,9 +19,28 @@ public class Lab2 {
     static byte[] getKSmallestNumbers(byte[] array, int k) {
         assert(k >= 0 && k <= array.length);
 
+        // посчитаем вхождение каждого байта
+        int[] count = new int[256];
+        for (byte value: array)
+            count[value]++;
+
         byte[] result = new byte[k];
-        Arrays.sort(array);
-        System.arraycopy(array, 0, result, 0, k);
+
+        byte curByte = 0;
+
+        // для каждого байта будем вставлять его до тех пор, пока можем
+        for (int i = 0; k > 0;) {
+            while (count[curByte] > 0 && k > 0) {
+                result[i++] = curByte;
+                count[curByte]--;
+                k--;
+            }
+            curByte++;
+        }
+
+        // Итоговая сложность: O(n)
+        // Затраты по памяти: O(1), т.к. размер массива не зависит от размера входных данных
+
         return result;
     }
 
@@ -45,10 +64,21 @@ public class Lab2 {
      *
      */
     static boolean arePermutations(String firstString, String secondString) {
-        return Arrays.equals(
-                firstString.chars().sorted().toArray(),
-                secondString.chars().sorted().toArray()
-        );
+        // т.к. входные данные имеют ограничения, т.е. нам подаются только цифры и строчные буквы
+        // то мы можем воспользоваться этим фактом
+        // '0' - 48, 'z' - 122
+        // все остальные цифры и буквы лежат в интервале между 48 и 122
+        //
+        // учитывая данные ограничения мы можем посчитать вхождения каждого символа в первую строку
+        // затем вычесть количество вхождений каждого символа из второй строки
+        // если в результате какой-то элемент массива счетчиков будет отличен от нуля, то массивы не будут перестановками
+
+        // выделим память на всю ASCII таблицу
+        int[] count = new int[256];
+        firstString.chars().forEach(x -> count[x]++);
+        secondString.chars().forEach(x -> count[x]--);
+
+        return Arrays.stream(count).noneMatch(x -> x != 0);
     }
 
     /**

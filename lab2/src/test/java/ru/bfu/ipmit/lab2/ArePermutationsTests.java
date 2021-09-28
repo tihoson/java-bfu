@@ -18,6 +18,10 @@ public class ArePermutationsTests {
         secondString = "qwert";
         assertFalse(Lab2.arePermutations(firstString, secondString));
 
+        firstString = "aaaaaaaaaaaabbbbbbbbbbb";
+        secondString = "aaaaaaaaaaaabbbbbbbbbbb";
+        assertTrue(Lab2.arePermutations(firstString, secondString));
+
         assertTrue(Lab2.arePermutations("", ""));
     }
 
