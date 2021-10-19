@@ -130,7 +130,7 @@ public class BaseDrivingLicenseValidator implements DrivingLicenseValidator {
                                 Arrays.asList(availableCategories).contains((String) category))
                 );
                 if (!result.isValid()) {
-                    result.addValidationError("Categories does not contains \"C\" or \"D\"");
+                    result.addValidationError("Categories does not contains \"B\", \"C\" or \"D\"");
                 }
             } else {
                 result.addValidationError(
