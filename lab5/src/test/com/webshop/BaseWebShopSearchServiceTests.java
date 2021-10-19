@@ -31,9 +31,9 @@ public class BaseWebShopSearchServiceTests {
         long count = 50;
         for (long i = 0; i < count; i++) {
             productAvailabilities.add(
-                    new BaseProductAvailability(i, i % 2, 1L,
+                    new BaseProductAvailability(i, 1 + i % 2, 1L,
                             "teapot" + Long.valueOf(i).toString(), "teapot" + Long.valueOf(i).toString(),
-                            (double)i, (double)(count - i), i));
+                            (double)i * (i % 2), (double)(count - i), i));
         }
 
         WebShop webShop = new BaseWebShop(productSuppliers, productCategories, productAvailabilities);
