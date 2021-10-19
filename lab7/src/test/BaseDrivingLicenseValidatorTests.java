@@ -40,7 +40,7 @@ public class BaseDrivingLicenseValidatorTests {
                 "qwe",
                 "11 22 333333",
                 "qwe",
-                Collections.singletonList(""));
+                Collections.singletonList("A"));
         DrivingLicenseValidator validator = new BaseDrivingLicenseValidator();
         ValidationResult result = validator.validate(license);
         assertEquals(

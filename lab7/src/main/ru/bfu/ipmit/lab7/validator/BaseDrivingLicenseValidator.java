@@ -9,15 +9,11 @@ import ru.bfu.ipmit.lab7.validation.field.ValidCategories;
 import ru.bfu.ipmit.lab7.validation.field.ValidDate;
 import ru.bfu.ipmit.lab7.validation.field.ValidLicenseNumber;
 
-import javax.swing.text.DateFormatter;
 import java.lang.reflect.Field;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -128,8 +124,10 @@ public class BaseDrivingLicenseValidator implements DrivingLicenseValidator {
             Object fieldFromClass = field.get(object);
             if (fieldFromClass instanceof List) {
                 List<?> categories = (List<?>)fieldFromClass;
+                String[] availableCategories = {"B", "C", "D"};
                 result.setValid(categories.size() > 0 &&
-                        (categories.stream().anyMatch(category -> category.equals("C") || category.equals("D")))
+                        categories.stream().anyMatch(category ->
+                                Arrays.asList(availableCategories).contains((String) category))
                 );
                 if (!result.isValid()) {
                     result.addValidationError("Categories does not contains \"C\" or \"D\"");
